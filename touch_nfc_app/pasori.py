@@ -46,7 +46,7 @@ while True:
         idm = binascii.hexlify(tag.idm)
         print 'Suica detected. idm = ' + idm
         data = {'idm': idm}
-        response = requests.put(url, data=data, header=header)
+        response = requests.put(url, data=data, headers=header)
 
         # リクエスト失敗時にエラー音を鳴らす
         if not response.status_code == requests.codes.ok:
@@ -57,7 +57,7 @@ while True:
         # カード登録時にのみ音を鳴らす
         res_json = response.json()
         res_code = res_json['context']
-        if res_code == 'save_idm'
+        if res_code == 'save_idm':
             os.system('aplay assets/save_idm.wav')
             print(res_json.values())
         #end if
