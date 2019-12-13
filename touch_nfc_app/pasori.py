@@ -25,6 +25,9 @@ target_req_suica.sensf_req = bytearray.fromhex("0000030000")
 
 # dakoku_san API endpoint
 url = os.environ['DAKOKU_SAN_API_URL']
+# dakoku_san API Token
+token = os.environ['DAKOKU_SAN_API_TOKEN']
+header = {'Authorization': 'Bearer ' + token}
 
 print 'Suica waiting...'
 while True:
@@ -43,7 +46,7 @@ while True:
         idm = binascii.hexlify(tag.idm)
         print 'Suica detected. idm = ' + idm
         data = {'idm': idm}
-        response = requests.put(url, data=data)
+        response = requests.put(url, data=data, header=header)
 
         # リクエスト失敗時にエラー音を鳴らす
         if not response.status_code == requests.codes.ok:
