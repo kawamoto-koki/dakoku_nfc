@@ -50,8 +50,8 @@ while True:
 
         # リクエスト失敗時にエラー音を鳴らす
         if not response.status_code == requests.codes.ok:
-            print(response.text)
             os.system('aplay assets/error.wav')
+            print 'response error'
         #end if
 
         # カード登録時にのみ音を鳴らす
@@ -59,7 +59,7 @@ while True:
         res_code = res_json['context']
         if res_code == 'save_idm':
             os.system('aplay assets/save_idm.wav')
-            print(res_json.values())
+            print 'save idm'
         #end if
 	time.sleep(TIME_wait)
     #end if
